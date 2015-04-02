@@ -1,0 +1,30 @@
+redismaster:
+  image: redis
+  ports:
+    - "6379"
+redisslave:
+  image: redis
+  command: redis-server --slaveof redismaster 6379
+  ports:
+    - "6379"
+  links:
+    - redismaster
+redissentinel:
+  image: redis
+  command: redis-sentinel /etc/redis/sentinel.conf
+  volumes:
+    - ./sentinel.conf:/etc/redis/sentinel.conf
+  ports:
+    - "26379"
+  links:
+    - redismaster
+    - redisslave
+app:
+  build: .
+  command: ruby app.rb
+  volumes:
+    - .:/usr/src/app
+  links:
+    - redismaster
+    - redisslave
+    - redissentinel
