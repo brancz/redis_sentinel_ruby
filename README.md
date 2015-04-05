@@ -1,23 +1,16 @@
 Redis Sentinels Ruby
 ====================
 
-This is an example of how to setup a high available redis server using Docker.
+This is an example of how to setup a highly available redis using Docker.
 
 All you need is [Docker](https://www.docker.com/) and
 [Docker-Compose](https://docs.docker.com/compose/).
 
 Clone the repository and startup everything
 
-	docker-compose up
+	docker-compose up -d
 
-> Hint: you might need to build the dockerimages first with `docker-compose
-> build`.
-
-Then you can start everything in the background.
-
-	docker-compose start
-
-Now the fun begins.
+Now the fun can begin.
 
 Let's take a look at the `redissentinel` container logs.
 
